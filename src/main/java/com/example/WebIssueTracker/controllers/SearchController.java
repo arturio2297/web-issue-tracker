@@ -15,8 +15,6 @@ public class SearchController {
 
     private final UserService userService;
     private final IssueService issueService;
-    private static String filter;
-    private static String keyword;
 
     public SearchController(UserService userService, IssueService issueService) {
         this.userService = userService;
@@ -39,18 +37,14 @@ public class SearchController {
         if (userService.checkAuthentication()) {
             user_id = userService.getCurrentUser().getId();
         }
-        model.addAttribute("user_id",user_id);
-        filter = f;
-        keyword = k;
-        Page<IssueModel> page = issueService.searchIssues(pageNum,filter,keyword);
+        Page<IssueModel> page = issueService.searchIssues(pageNum,f,k);
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("issues", page.getContent());
         model.addAttribute("search","yes");
-        model.addAttribute("f",filter);
-        model.addAttribute("k",keyword);
-        System.out.println(filter + " " + keyword);
+        model.addAttribute("f",f);
+        model.addAttribute("k",k);
         return "main_page";
     }
 }
