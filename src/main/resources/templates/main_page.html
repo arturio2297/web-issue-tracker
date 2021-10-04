@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link th:href="@{/css/cards.css}" rel="stylesheet"/>
+    <link th:href="@{/css/navbar.css}" rel="stylesheet"/>
+    <link th:href="@{/css/search-bar.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <title>Issues</title>
+</head>
+<body>
+<div class="page">
+    <div th:insert="blocks/navbar :: navbar" />
+    <main>
+        <div class="search-box">
+            <form action="/search">
+                <select name="filter">
+                    <option value="all">All</option>
+                    <option value="author">Authors</option>
+                    <option value="name">Titles</option>
+                    <option value="description">Description</option>
+                </select>
+                <input type="text" name="keyword" placeholder="Find issues.." th:required="required"></input>
+                <button type="submit">Search</button>
+            </form>
+            <a th:href="'/'">
+                <button type="submit">Find all</button>
+            </a>
+        </div>
+        <div class="container">
+            <div th:each="el:${issues}" class="some_card" th:classappend="${(el.status.name() =='Closed' ? 'card_red': '') +
+                                (el.status.name() =='Created' ? 'card_yellow': '')+
+                                 (el.status.name() =='Resolved' ? 'card_green': '')}">
+                <div class="box">
+                    <div class="content">
+                        <p th:text="${el.name}"/>
+                        <p th:text="'Author: ' + ${el.author}"/>
+                        <p th:text="'Create: ' + ${el.createdDate}"/>
+                        <p th:if="${el.lastUpdateDate != null}"
+                           th:text="'Last update: ' + ${el.lastUpdateDate}"/>
+                        <p th:text="'Status: ' + ${el.status.name()}"/>
+                        <a th:href="'/detail/' + ${el.id}">Details</a>
+                        <a th:if="${el.user.id == user_id && el.status.name() == 'Created'}"
+                           th:href="'/edit/' + ${el.id}">Edit</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="'/delete/' + ${el.id}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div th:if="${search} == 'yes'">
+        <div th:insert="blocks/footer_search :: footer"/>
+    </div>
+    <div th:if="${search} == 'no'">
+        <div th:insert="blocks/footer_main :: footer"/>
+    </div>
+</div>
+</body>
+</html>

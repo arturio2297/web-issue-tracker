@@ -1,0 +1,18 @@
+<div th:fragment="footer">
+    <footer class="footer">
+        <div>
+            <a th:if="${currentPage > 1}" th:href="'/search/' + ${f} + '/' + ${k} + '/page/1'">FIRST</a>
+            <span th:unless="${currentPage > 1}">FIRST</span>
+            <a th:if="${currentPage > 1}" th:href="'/search/' + ${f} + '/' + ${k} + '/page/' + ${currentPage - 1}">PREVIOUS</a>
+            <span th:unless="${currentPage > 1}">PREVIOUS</span>
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+    <a th:if="${currentPage != i}" th:href="'/search/' + ${f} + '/' + ${k} + '/page/' + ${i}">[[${i}]]</a>
+    <span th:unless="${currentPage != i}">[[${i}]]</span>
+</span>
+            <a th:if="${currentPage < totalPages}" th:href="'/search/' + ${f} + '/' + ${k} + '/page/' + ${currentPage + 1}">NEXT</a>
+            <span th:unless="${currentPage < totalPages}">NEXT</span>
+            <a th:if="${currentPage < totalPages}" th:href="'/search/' + ${f} + '/' + ${k} + '/page/' + ${totalPages}">LAST</a>
+            <span th:unless="${currentPage < totalPages}">LAST</span>
+        </div>
+    </footer>
+</div>

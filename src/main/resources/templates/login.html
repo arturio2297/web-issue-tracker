@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Login</title>
+    <link th:href="@{/css/navbar.css}" rel="stylesheet"/>
+    <link th:href="@{/css/log_but.css}" rel="stylesheet"/>
+    <style>
+
+        .my-remember-me {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .my-remember-me label {
+            display: inline;
+        }
+
+        .my-remember-me input {
+            display: inline;
+        }
+
+    </style>
+</head>
+<body>
+<div class="page">
+    <div th:insert="blocks/navbar :: navbar"></div>
+    <main>
+        <div class="content">
+            <div class="login">
+                <div class="login-container">
+                    <div class="login-triangle"></div>
+                    <h2 class="login-header">Log in</h2>
+                    <form action="/login" method="POST">
+                        <p><input type="text" placeholder="Username" name="username"></p>
+                        <p><input type="password" placeholder="Password" name="password"></p>
+                        <div align="center">
+                            <label for="remember-me">
+                                <input id="remember-me" name="remember-me" type="checkbox">
+                                Remember-me</label>
+                        </div>
+                        <div align="center">
+                            <button type="submit" class="custom-btn btn-4">Login</button>
+                        </div>
+                    </form>
+                    <div align="center">
+                        <a th:href="'/register'">
+                            <button class="custom-btn btn-4">Register</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<div class="front" th:fragment="navbar">
+    <header>
+        <a href="/">
+            <button class="my-custom-btn btn-9">HOME</button>
+        </a>
+        <a sec:authorize="!isAuthenticated()" href="/register">
+            <button class="my-custom-btn btn-9">REGISTER</button>
+        </a>
+        <a sec:authorize="!isAuthenticated()" href="/login">
+            <button class="my-custom-btn btn-9">LOGIN</button>
+        </a>
+        <a sec:authorize="isAuthenticated()" href="/logout">
+            <button class="my-custom-btn btn-9">LOGOUT</button>
+        </a>
+        <a sec:authorize="isAuthenticated()" href="/add">
+            <button class="my-custom-btn btn-9">WRITE ISSUE</button>
+        </a>
+    </header>
+    <div id="nav-container">
+        <div class="bg"></div>
+        <div class="button" tabindex="0">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </div>
+        <div id="nav-content" tabindex="0">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/add">Write issue</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/login">Login</a></li>
+                <li sec:authorize="!isAuthenticated()"><a href="/register">Register</a></li>
+                <li sec:authorize="isAuthenticated()"><a href="/logout">Logout</a></li>
+                <div sec:authorize="isAuthenticated()">
+                    <p class="small" th:each="authority : ${#authentication.getAuthorities()}"
+                       th:if="${authority.getAuthority().startsWith('ROLE_')}"
+                       th:text="'Your role: ' + ${authority.getAuthority().replaceFirst('ROLE_', '')}" />
+                    <p class="small" th:text="'Your username: ' + ${#authentication.getName()}" />
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

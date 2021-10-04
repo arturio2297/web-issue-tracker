@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8" />
+    <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{/css/log_but.css}" rel="stylesheet" />
+    <link th:href="@{/css/issue_form.css}" rel="stylesheet" />
+    <link th:href="@{/css/issue_detail.css}" rel="stylesheet"/>
+    <title>Edit issue</title>
+</head>
+<body>
+<div class="page">
+    <div th:insert="blocks/navbar :: navbar"></div>
+    <main>
+        <div class="content">
+            <div class="issue">
+                <div class="issue-container">
+                    <h2 class="issue-header">Edit your issue</h2>
+                    <form th:action="'/edit/' + ${issue.id}" th:object="${issue}" method="POST">
+                        <p><input type="text" th:value="${issue.name}" th:field="*{name}" required></p>
+                        <ul class="error">
+                            <li th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
+                        </ul>
+                        <p><textarea placeholder="Description" th:value="${issue.description}" required
+                                     th:field="*{description}"></textarea></p>
+                        <ul class="error">
+                            <li th:each="err : ${#fields.errors('description')}" th:text="${err}"/>
+                        </ul>
+                        <div align="center">
+                            <button type="submit" class="custom-btn btn-4">Submit</button>
+                            <p data-tooltip="You can use some set of tags to decorate your messages:
+                        i,b,br,u,ul,li,h1,h2,h3,h4,h5,h6,a,img">learn more about decorating messages</p>
+                        </div>
+                    </form>
+                    <a th:href="'/'">
+                        <div align="center">
+                            <button class="custom-btn btn-4">Cancel</button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

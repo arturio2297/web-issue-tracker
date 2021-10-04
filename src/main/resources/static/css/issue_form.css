@@ -1,0 +1,55 @@
+.issue {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    justify-content: center;
+}
+
+.issue-header,
+.issue p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.issue-header {
+    background: rgb(209, 209, 209);
+    padding: 20px;
+    font-size: 1.4em;
+    font-weight: normal;
+    text-align: center;
+    text-transform: uppercase;
+    color: rgb(0, 0, 0);
+}
+
+.issue-container {
+    background: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.issue p {
+    padding: 12px;
+}
+
+.issue input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    padding: 16px;
+    outline: 0;
+}
+
+.issue textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    padding: 16px;
+    outline: 0;
+    height: 400px;
+    resize: none;
+}

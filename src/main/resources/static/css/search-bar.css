@@ -1,0 +1,26 @@
+.search-box {
+    height: 50px;
+    display: flex;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 1;
+
+}
+
+
+.search-box select,
+.search-box input {
+    display: inline-block;
+    font-size: 15px;
+    height: 50px;
+}
+
+.search-box button,
+.search-box a {
+    display: inline-block;
+    font-size: 15px;
+    width: 80px;
+    height: 50px;
+    margin-left: 5px;
+}

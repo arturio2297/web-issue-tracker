@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link th:href="@{/css/navbar.css}" rel="stylesheet" />
+    <link th:href="@{/css/log_but.css}" rel="stylesheet" />
+    <title>Registration</title>
+</head>
+<body>
+<div class="page">
+    <div th:insert="blocks/navbar :: navbar"></div>
+    <main>
+        <div class="content">
+            <div class="login">
+                <div class="login-container">
+                    <div class="login-triangle"></div>
+                    <h2 class="login-header">Register</h2>
+                    <form th:action="@{/register}" th:object="${user}" method="POST">
+                        <p><input type="text" placeholder="First name" th:field="*{firstName}" required></p>
+                        <ul class="error">
+                            <li th:each="err : ${#fields.errors('firstName')}" th:text="${err}"/>
+                        </ul>
+                        <p><input type="text" placeholder="Last name" th:field="*{lastName}" required></p>
+                        <ul class="error">
+                            <li th:each="err : ${#fields.errors('lastName')}" th:text="${err}"/>
+                        </ul>
+                        <p><input type="text" placeholder="Nickname" th:field="*{nickname}" required></p>
+                        <ul class="error">
+                            <li th:each="err : ${#fields.errors('nickname')}" th:text="${err}"/>
+                        </ul>
+                        <p><input type="password" placeholder="Password" th:field="*{password}" equired></p>
+                        <ul class="error">
+                            <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                        </ul>
+                        <p><input type="password" placeholder="Repeat password" name="password_again" required></p>
+                        <div align="center">
+                            <button type="submit" class="custom-btn btn-4">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

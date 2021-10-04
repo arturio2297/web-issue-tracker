@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <link th:href="@{/css/navbar.css}" rel="stylesheet"/>
+    <link th:href="@{/css/log_but.css}" rel="stylesheet"/>
+    <link th:href="@{/css/issue_detail.css}" rel="stylesheet"/>
+    <link th:href="@{/css/footer.css}" rel="stylesheet"/>
+    <title>Issue detail</title>
+</head>
+<body>
+<div class="page">
+    <div th:insert="blocks/navbar :: navbar" />
+    <main>
+        <div class="content">
+            <div class="my-issue-box">
+                <h3 th:text="${issue.name}"/>
+                <p th:utext="${issue.description}"/>
+                <h4 th:text="'Author: ' + ${issue.author}"/>
+                <h4 th:text="'Create: ' + ${issue.createdDate}"/>
+                <h4 th:if="${issue.lastUpdateDate != null}" th:text="${'Last update: ' + issue.lastUpdateDate}"/>
+                <h4 th:text="'Current status: ' + ${issue.status}"/>
+                <div align="center" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <form th:action="'/detail/' + ${issue.id} + '/change-status'" method="post">
+                        <select size="1" name="status">
+                            <option selected="selected" value="Created">Created</option>
+                            <option value="Resolved">Resolved</option>
+                            <option value="Closed">Closed</option>
+                        </select>
+                        <button class="custom-btn btn-4" type="submit">Change status</button>
+                    </form>
+                </div>
+            </div>
+            <div class="comment-container">
+                <div th:each="el:${comments}" class="my-comment-box">
+                    <p th:utext="${el.context}"/>
+                    <h4 th:text="${el.author}"/>
+                    <h4 th:text="${el.createdDate}"/>
+                    <div align="center" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="'/detail/' + ${issue.id} + '/delete/' + ${el.id}">
+                            <button class="custom-btn btn-4">Delete this comment</button>
+                        </a>
+                    </div>
+                </div>
+                <div align="center" class="my-comment-form" th:if="${issue.status.name() == 'Created'}"
+                     sec:authorize="isAuthenticated()">
+                    <form th:action="@{'/add-comment/' + ${issue.id}}" th:object="${comment}" method="post">
+                        <textarea name="context" th:field="*{context}"/>
+                        <ul class="error">
+                            <li th:each="err : ${#fields.errors('context')}" th:text="${err}"/>
+                        </ul>
+                        <div align="center">
+                            <button class="custom-btn btn-4" type="submit">Add comment</button>
+                            <p data-tooltip="You can use some set of tags to decorate your messages:
+                        i,b,br,u,ul,li,h1,h2,h3,h4,h5,h6,a,img">learn more about decorating messages</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+.my-issue-box {
+    background-color: white;
+    width: 70vw;
+    margin: 5px;
+    height: auto;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.my-comment-box {
+    background-color: white;
+    border-radius: 10px;
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    margin-top: 10px;
+    padding: 10px;
+    list-style: square outside;
+}
+
+.my-comment-form {
+    background-color: white;
+    border-radius: 10px;
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    height: auto;
+    padding: 10px;
+}
+
+.my-issue-box p,
+my-issue-box h3,
+my-issue-box h4 {
+    line-height: 0.9em;
+}
+
+
+.my-comment-box p,
+my-comment-box h3,
+my-comment-box h4 {
+    line-height: 0.9em;
+}
+
+.my-comment-form textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    outline: 0;
+    height: 150px;
+    resize: none;
+    margin: 5px;
+    font-size: 15px;
+}
+
+.my-comment-form select {
+    margin: 5px;
+}
+
+.my-comment-form button {
+    margin: 5px;
+}
+
+.my-comment-form p {
+    margin: 5px;
+    display: inline;
+}
+
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    width: 300px;
+    left: 0;
+    top: 0;
+    background: #000000;
+    color: #fff;
+    border-radius: 15px;
+    padding: 0.5em;
+    box-shadow: 2px 2px 5px rgba(139, 139, 139, 0.3);
+    pointer-events: none;
+    opacity: 0;
+    transition: 1s;
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+    top: 2em;
+}
