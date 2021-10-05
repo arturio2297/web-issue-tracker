@@ -37,6 +37,7 @@ public class SearchController {
         if (userService.checkAuthentication()) {
             user_id = userService.getCurrentUser().getId();
         }
+        model.addAttribute("user_id", user_id);
         Page<IssueModel> page = issueService.searchIssues(pageNum,f,k);
         model.addAttribute("currentPage", pageNum);
         model.addAttribute("totalPages", page.getTotalPages());
